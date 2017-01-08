@@ -1,5 +1,6 @@
 package com.dw_projects.remotecontrol;
 
+import android.os.SystemClock;
 import android.util.Log;
 import java.io.*;
 import java.net.InetAddress;
@@ -17,12 +18,14 @@ public class TCPClient {
 
     PrintWriter out;
     BufferedReader in;
+    OutputHandler outputHandler;
 
     /**
      *  Constructor of the class. OnMessagedReceived listens for the messages received from server
      */
-    public TCPClient(OnMessageReceived listener) {
+    public TCPClient(OnMessageReceived listener, OutputHandler outputHandler) {
         mMessageListener = listener;
+        this.outputHandler = outputHandler;
     }
 
     /**
@@ -67,13 +70,17 @@ public class TCPClient {
 
                 //in this while the client listens for the messages sent by the server
                 while (mRun) {
+                    SystemClock.sleep(10);
+                    sendMessage(outputHandler.getBufferedOutput());
+
+
                     char[] buffer = new char[100];
                     String message = "";
                     int len;
-                    while ((len = in.read(buffer)) != -1) {
+                    do {
+                        len = in.read(buffer);
                         message += String.copyValueOf(buffer, 0, len);
-                        break;
-                    }
+                    } while (in.ready());
 
                     if (!Objects.equals(message, "")) {
                         //call the method messageReceived from MyActivity class

@@ -42,10 +42,9 @@ public class RemoteControlApplication extends Application {
     private Handler handler = new Handler();
     private Runnable runnable = new Runnable(){
         public void run() {
-            listener.refresh();
-            handler.postDelayed(runnable, 1000);
             if (currentActivity != null)
                 currentActivity.refresh();
+            handler.postDelayed(runnable, 1000);
         }
     };
 

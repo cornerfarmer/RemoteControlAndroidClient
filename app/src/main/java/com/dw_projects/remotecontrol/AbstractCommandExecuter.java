@@ -9,13 +9,11 @@ public abstract class AbstractCommandExecuter {
     protected void sendCommand(String name)
     {
         outputHandler.addOutputCommand(new Command(getAppName(), name));
-        listener.sendMessagesInQueue();
     }
 
     protected void sendCommand(String name, String[] arguments)
     {
         outputHandler.addOutputCommand(new Command(getAppName(), name, arguments));
-        listener.sendMessagesInQueue();
     }
 
     protected abstract String getAppName();

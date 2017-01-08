@@ -23,7 +23,7 @@ public class StatusTargetEntry {
         for (int i = 0; i < arguments.length; i++)
         {
             if (arguments[i].equals(boolean.class))
-                convertedArguments[i] = Boolean.parseBoolean(command.getArguments()[i]);
+                convertedArguments[i] = Boolean.parseBoolean(command.getArguments()[i]) || "1".equals(command.getArguments()[i]);
             else if (arguments[i].equals(int.class))
                 convertedArguments[i] = Integer.parseInt(command.getArguments()[i]);
         }

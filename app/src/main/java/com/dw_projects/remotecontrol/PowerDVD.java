@@ -4,6 +4,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.SeekBar;
+import android.widget.TextView;
+
+import com.triggertrap.seekarc.SeekArc;
 
 import javax.inject.Inject;
 
@@ -27,24 +30,25 @@ public class PowerDVD extends AppCompatActivity {
         ((RemoteControlApplication) getApplication()).setCurrentActivity(this);
 
 
-        ((SeekBar)findViewById(R.id.volumeSeekBar)).setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+        ((SeekArc)findViewById(R.id.volumeSeekBar)).setOnSeekArcChangeListener(new SeekArc.OnSeekArcChangeListener() {
 
             @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
+            public void onStopTrackingTouch(SeekArc seekBar) {
                 // TODO Auto-generated method stub
             }
 
             @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
+            public void onStartTrackingTouch(SeekArc seekBar) {
                 // TODO Auto-generated method stub
             }
 
             @Override
-            public void onProgressChanged(SeekBar seekBar, int progress,boolean fromUser) {
+            public void onProgressChanged(SeekArc seekBar, int progress,boolean fromUser) {
                 // TODO Auto-generated method stub
 
                 if (fromUser) {
                     powerDVDCommandExecuter.setVolume(progress);
+                    ((TextView)findViewById(R.id.volumeTextView)).setText(Integer.toString(progress));
                 }
             }
         });
@@ -52,8 +56,14 @@ public class PowerDVD extends AppCompatActivity {
 
     public void refresh()
     {
-        SeekBar volumeSeekBar = (SeekBar)findViewById(R.id.volumeSeekBar);
+        SeekArc volumeSeekBar = (SeekArc)findViewById(R.id.volumeSeekBar);
         volumeSeekBar.setProgress(powerDVDStatus.getVolume());
+
+        TextView volumeText = (TextView)findViewById(R.id.volumeTextView);
+        volumeText.setText(Integer.toString(powerDVDStatus.getVolume()));
+
+        volumeSeekBar.setEnabled(!powerDVDStatus.isMuted());
+       //volumeText.setEnabled(!powerDVDStatus.isMuted());
     }
 
     public void open(View view)
@@ -104,6 +114,11 @@ public class PowerDVD extends AppCompatActivity {
     public void ok(View view)
     {
         powerDVDCommandExecuter.ok();
+    }
+
+    public void mute(View view)
+    {
+        powerDVDCommandExecuter.mute();
     }
 
 

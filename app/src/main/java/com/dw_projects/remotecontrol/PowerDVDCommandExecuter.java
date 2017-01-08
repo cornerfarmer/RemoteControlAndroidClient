@@ -69,6 +69,11 @@ public class PowerDVDCommandExecuter extends AbstractCommandExecuter {
         sendCommand("Vol", arg);
     }
 
+    public void mute()
+    {
+        sendCommand("SwitchMute");
+    }
+
     @Override
     protected String getAppName() {
         return "PDVD";

@@ -25,37 +25,6 @@ public class Listener {
         new connectTask().execute("");
     }
 
-
-    public void sendMessagesInQueue()
-    {
-        try {
-            new sendTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, outputHandler.getBufferedOutput());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void refresh()
-    {
-        sendMessagesInQueue();
-    }
-
-    public class sendTask extends AsyncTask<String,String,TCPClient> {
-
-        @Override
-        protected TCPClient doInBackground(String... message) {
-            mTcpClient.sendMessage(message[0]);
-            return null;
-        }
-
-        @Override
-        protected void onProgressUpdate(String... values) {
-            super.onProgressUpdate(values);
-
-        }
-    }
-
-
     public class connectTask extends AsyncTask<String,String,TCPClient> {
 
         @Override
@@ -69,7 +38,7 @@ public class Listener {
                     //this method calls the onProgressUpdate
                     publishProgress(message);
                 }
-            });
+            }, outputHandler);
             mTcpClient.run();
 
             return null;
