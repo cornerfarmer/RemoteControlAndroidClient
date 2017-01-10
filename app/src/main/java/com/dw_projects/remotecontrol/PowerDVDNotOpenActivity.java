@@ -30,6 +30,8 @@ public class PowerDVDNotOpenActivity extends AbstractRemoteControlActivity {
 
         ((RemoteControlApplication) getApplication()).component().inject(this);
         ((RemoteControlApplication) getApplication()).setCurrentActivity(this);
+
+        refresh();
     }
 
     public void open(View view)
