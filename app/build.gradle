@@ -38,6 +38,9 @@ dependencies {
 }
 
 dependencies {
+    compile 'com.android.support:design:25.+'
+}
+dependencies {
     repositories {
         mavenCentral()
     }

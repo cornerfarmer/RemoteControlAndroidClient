@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_not_connected"
+    android:id="@+id/activity_power_dvdnot_open"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.dw_projects.remotecontrol.NotConnectedActivity">
+    tools:context="com.dw_projects.remotecontrol.PowerDVDNotOpenActivity">
+
 
 
     <LinearLayout
@@ -20,34 +21,32 @@
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_gravity="center">
 
             <TextView
-                android:text="No connection found"
+                android:text="PowerDVD is not available"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/NotConnectedTextView"
-                android:textAppearance="@android:style/TextAppearance.Large" />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textPersonName"
-                android:ems="10"
-                android:id="@+id/IpField"
-                android:layout_marginTop="50dp"
-                android:singleLine="true"
-                android:selectAllOnFocus="false"
-                android:hint="Enter IP address" />
+                android:id="@+id/owerDVDNotAvailableText"
+                android:textAppearance="@android:style/TextAppearance.Large"
+                android:textAlignment="center"
+                android:gravity="center"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true" />
 
             <Button
-                android:text="Retry"
+                android:text="Open PowerDVD"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/button2"
-                android:textAlignment="center"
-                android:layout_marginTop="50dp" />
-        </LinearLayout>
+                android:id="@+id/button"
+                android:layout_below="@+id/owerDVDNotAvailableText"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="50dp"
+                android:onClick="open" />
 
+        </LinearLayout>
     </LinearLayout>
+
 </RelativeLayout>

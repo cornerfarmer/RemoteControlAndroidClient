@@ -27,6 +27,8 @@ public class PowerDVD extends AbstractRemoteControlActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_power_dvd);
 
+        createNavBar();
+
         ((RemoteControlApplication) getApplication()).component().inject(this);
         ((RemoteControlApplication) getApplication()).setCurrentActivity(this);
 

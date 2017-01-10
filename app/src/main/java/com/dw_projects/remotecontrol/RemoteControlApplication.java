@@ -20,6 +20,7 @@ public class RemoteControlApplication extends Application {
     public interface ApplicationComponent {
         void inject(PowerDVD powerDVD);
         void inject(PowerDVDNotOpenActivity powerDVDNotOpenActivity);
+        void inject(WindowsActivity windowsActivity);
         void inject(NotConnectedActivity notConnectedActivity);
         void inject(RemoteControlApplication application);
     }

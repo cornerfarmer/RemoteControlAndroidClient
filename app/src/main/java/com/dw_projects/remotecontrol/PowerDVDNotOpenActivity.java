@@ -26,6 +26,8 @@ public class PowerDVDNotOpenActivity extends AbstractRemoteControlActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_power_dvdnot_open);
 
+        createNavBar();
+
         ((RemoteControlApplication) getApplication()).component().inject(this);
         ((RemoteControlApplication) getApplication()).setCurrentActivity(this);
     }
