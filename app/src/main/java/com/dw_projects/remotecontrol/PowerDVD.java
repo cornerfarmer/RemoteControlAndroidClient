@@ -1,5 +1,6 @@
 package com.dw_projects.remotecontrol;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -10,7 +11,7 @@ import com.triggertrap.seekarc.SeekArc;
 
 import javax.inject.Inject;
 
-public class PowerDVD extends AppCompatActivity {
+public class PowerDVD extends AbstractRemoteControlActivity {
 
     @Inject PowerDVDCommandExecuter powerDVDCommandExecuter;
     @Inject PowerDVDStatus powerDVDStatus;
@@ -56,6 +57,11 @@ public class PowerDVD extends AppCompatActivity {
 
     public void refresh()
     {
+        if (!powerDVDStatus.isOpened()) {
+            Intent myIntent = new Intent(this, PowerDVDNotOpenActivity.class);
+            startActivity(myIntent);
+        }
+
         SeekArc volumeSeekBar = (SeekArc)findViewById(R.id.volumeSeekBar);
         volumeSeekBar.setProgress(powerDVDStatus.getVolume());
 

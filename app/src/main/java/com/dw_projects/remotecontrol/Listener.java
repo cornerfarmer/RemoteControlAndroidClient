@@ -1,15 +1,15 @@
 package com.dw_projects.remotecontrol;
 
 import android.os.AsyncTask;
-import android.os.Bundle;
-import android.view.View;
+
 import javax.inject.Singleton;
 import javax.inject.Inject;
 
 @Singleton
 public class Listener {
 
-    private TCPClient mTcpClient;
+    private TCPClient tcpClient;
+    public String serverIp = "192.168.178.56";
 
     @Inject InputHandler inputHandler;
     @Inject OutputHandler outputHandler;
@@ -22,8 +22,34 @@ public class Listener {
 
     public void startListening()
     {
-        new connectTask().execute("");
+        if (isStopped()) {
+            new connectTask().execute("");
+        }
     }
+
+    public boolean isConnected()
+    {
+        return tcpClient != null && tcpClient.getStatus() == 2;
+    }
+
+    public boolean isRetrying()
+    {
+        return tcpClient != null && tcpClient.getStatus() == 1;
+    }
+
+    public boolean isStopped()
+    {
+        return tcpClient == null || tcpClient.getStatus() == 0;
+    }
+
+    public String getServerIp() {
+        return serverIp;
+    }
+
+    public void setServerIp(String serverIp) {
+        this.serverIp = serverIp;
+    }
+
 
     public class connectTask extends AsyncTask<String,String,TCPClient> {
 
@@ -31,7 +57,7 @@ public class Listener {
         protected TCPClient doInBackground(String... message) {
 
             //we create a TCPClient object and
-            mTcpClient = new TCPClient(new TCPClient.OnMessageReceived() {
+            tcpClient = new TCPClient(new TCPClient.OnMessageReceived() {
                 @Override
                 //here the messageReceived method is implemented
                 public void messageReceived(String message) {
@@ -39,7 +65,7 @@ public class Listener {
                     publishProgress(message);
                 }
             }, outputHandler);
-            mTcpClient.run();
+            tcpClient.run(serverIp);
 
             return null;
         }

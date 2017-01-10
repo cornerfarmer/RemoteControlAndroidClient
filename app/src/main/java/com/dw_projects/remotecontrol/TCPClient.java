@@ -9,12 +9,11 @@ import java.util.Objects;
 
 public class TCPClient {
 
-    private String serverMessage;
-    public static final String SERVERIP = "192.168.178.56"; //your computer IP address
+    private String serverMessage;//your computer IP address
     public static final int SERVERPORT = 10;
     private OnMessageReceived mMessageListener = null;
     private boolean mRun = false;
-    private boolean stopped = false;
+    private int status = 0;
 
     PrintWriter out;
     BufferedReader in;
@@ -39,17 +38,23 @@ public class TCPClient {
         }
     }
 
+    public int getStatus() {
+        return status;
+    }
+
     public void stopClient(){
         mRun = false;
     }
 
-    public void run() {
+    public void run(String serverIp) {
+
+        status = 1;
 
         mRun = true;
 
         try {
             //here you must put your computer's IP address.
-            InetAddress serverAddr = InetAddress.getByName(SERVERIP);
+            InetAddress serverAddr = InetAddress.getByName(serverIp);
 
             Log.e("TCP Client", "C: Connecting...");
 
@@ -57,7 +62,7 @@ public class TCPClient {
             Socket socket = new Socket(serverAddr, SERVERPORT);
 
             try {
-
+                status = 2;
                 //send the message to the server
                 out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())), true);
 
@@ -108,7 +113,7 @@ public class TCPClient {
 
         }
 
-        stopped = true;
+        status = 0;
 
     }
 
@@ -118,8 +123,4 @@ public class TCPClient {
         public void messageReceived(String message);
     }
 
-    public boolean hasStopped()
-    {
-        return stopped;
-    }
 }

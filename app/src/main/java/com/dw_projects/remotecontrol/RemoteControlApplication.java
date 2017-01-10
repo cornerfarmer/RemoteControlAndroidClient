@@ -1,6 +1,7 @@
 package com.dw_projects.remotecontrol;
 
 import android.app.Application;
+import android.content.Intent;
 import android.os.Handler;
 
 import dagger.Component;
@@ -11,13 +12,15 @@ public class RemoteControlApplication extends Application {
 
     @Inject Listener listener;
 
-    protected PowerDVD currentActivity;
+    protected AbstractRemoteControlActivity currentActivity;
 
 
     @Singleton
     @Component
     public interface ApplicationComponent {
         void inject(PowerDVD powerDVD);
+        void inject(PowerDVDNotOpenActivity powerDVDNotOpenActivity);
+        void inject(NotConnectedActivity notConnectedActivity);
         void inject(RemoteControlApplication application);
     }
     private ApplicationComponent component;
@@ -42,13 +45,19 @@ public class RemoteControlApplication extends Application {
     private Handler handler = new Handler();
     private Runnable runnable = new Runnable(){
         public void run() {
-            if (currentActivity != null)
-                currentActivity.refresh();
+            if (currentActivity != null) {
+                if (listener.isStopped() && !(currentActivity instanceof NotConnectedActivity)) {
+                    Intent myIntent = new Intent(currentActivity, NotConnectedActivity.class);
+                    startActivity(myIntent);
+                } else {
+                    currentActivity.refresh();
+                }
+            }
             handler.postDelayed(runnable, 1000);
         }
     };
 
-    public void setCurrentActivity(PowerDVD currentActivity){
+    public void setCurrentActivity(AbstractRemoteControlActivity currentActivity){
         this.currentActivity = currentActivity;
     }
 
