@@ -104,7 +104,7 @@ public class WindowsActivity extends AbstractRemoteControlActivity {
                             dragging = false;
                         } else if (mActivePointerId != INVALID_POINTER_ID) {
                             long clickDuration = Calendar.getInstance().getTimeInMillis() - startClickTime;
-                            if (clickDuration < 200) {
+                            if (clickDuration < 80) {
                                 handler.postDelayed(click, 250);
                                 lastClickTime = Calendar.getInstance().getTimeInMillis();
                             }
