@@ -8,12 +8,20 @@ public abstract class AbstractCommandExecuter {
 
     protected void sendCommand(String name)
     {
-        outputHandler.addOutputCommand(new Command(getAppName(), name));
+        try {
+            outputHandler.addOutputCommand(new Command(getAppName(), name));
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     protected void sendCommand(String name, String[] arguments)
     {
-        outputHandler.addOutputCommand(new Command(getAppName(), name, arguments));
+        try {
+            outputHandler.addOutputCommand(new Command(getAppName(), name, arguments));
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     protected abstract String getAppName();
