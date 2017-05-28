@@ -40,7 +40,7 @@ public class PowerDVDCommandExecuter extends AbstractCommandExecuter {
 
     public void ok()
     {
-        sendCommand("Ok");
+        sendCommand("OK");
     }
 
     public void menu()
