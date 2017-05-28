@@ -13,14 +13,23 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:icon,android:theme">
-        <activity android:name=".NotConnectedActivity" android:label="No connection">
+        <activity
+            android:name=".NotConnectedActivity"
+            android:label="No connection">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".PowerDVDNotOpenActivity" android:theme="@style/AppTheme.NoActionBar" android:label="PowerDVD"/>
-        <activity android:name=".PowerDVD" android:theme="@style/AppTheme.NoActionBar" android:label="PowerDVD"/>
+        <activity
+            android:name=".PowerDVDNotOpenActivity"
+            android:label="PowerDVD"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".PowerDVD"
+            android:label="PowerDVD"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".WindowsActivity"
             android:label="Windows"

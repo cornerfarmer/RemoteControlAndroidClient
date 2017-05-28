@@ -14,8 +14,10 @@ public class WindowsCommandExecuter extends AbstractCommandExecuter {
 
     public void mouseMove(int dx, int dy)
     {
-        String[] arg = {Integer.toString(dx), Integer.toString(dy)};
-        sendCommand("MouseMove", arg);
+        if (dx != 0 || dy != 0) {
+            String[] arg = {Integer.toString(dx), Integer.toString(dy)};
+            sendCommand("MouseMove", arg);
+        }
     }
 
     public void mouseLeftDown()
