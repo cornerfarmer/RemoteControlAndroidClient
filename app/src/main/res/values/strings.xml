@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">RemoteControl</string>
+    <string name="app_name">Remote control</string>
     <string name="title_activity_windows">WindowsActivity</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
